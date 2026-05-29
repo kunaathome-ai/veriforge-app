@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Layout as LayoutIcon, Home, Briefcase, Users, Database, Brain, Settings } from 'lucide-react'
+import { Layout as LayoutIcon, Home, Briefcase, Users, Database, Brain, Settings, LogOut } from 'lucide-react'
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children, onLogout }: { children: React.ReactNode; onLogout: () => void }) => {
   const location = useLocation()
 
   const navigation = [
@@ -19,7 +19,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <div className="fixed inset-y-0 left-0 w-64 bg-gray-900 text-white">
         <div className="flex items-center justify-center h-16 bg-gray-800">
           <LayoutIcon className="w-8 h-8 mr-2" />
-          <span className="text-xl font-bold">POW Admin</span>
+          <span className="text-xl font-bold">Veriforge Admin</span>
         </div>
         <nav className="mt-8">
           {navigation.map((item) => {
@@ -38,6 +38,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             )
           })}
         </nav>
+        
+        {/* Logout button */}
+        <div className="absolute bottom-0 left-0 right-0 p-4">
+          <button
+            onClick={onLogout}
+            className="flex items-center w-full px-6 py-3 text-gray-300 hover:bg-gray-800 hover:text-white transition-colors"
+          >
+            <LogOut className="w-5 h-5 mr-3" />
+            Logout
+          </button>
+        </div>
       </div>
 
       {/* Main content */}
