@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { CheckCircle, Upload, Home, AlertCircle } from 'lucide-react'
+import { CheckCircle, Upload, Home, AlertCircle, FileText, MapPin, Camera, List } from 'lucide-react'
 
 export default function Summary() {
   const navigate = useNavigate()
@@ -28,25 +28,25 @@ export default function Summary() {
 
   if (isComplete) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-500 to-green-600 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-500 to-emerald-600 p-4">
         <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full">
           <div className="flex flex-col items-center text-center">
-            <div className="bg-green-100 p-4 rounded-full mb-4">
-              <CheckCircle className="w-16 h-16 text-green-600" />
+            <div className="bg-green-100 p-4 rounded-full mb-6">
+              <CheckCircle className="w-20 h-20 text-green-600" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Evidence Submitted!</h2>
-            <p className="text-gray-600 mb-6">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Evidence Submitted!</h2>
+            <p className="text-gray-600 mb-6 text-lg">
               Your evidence has been successfully uploaded and is now being validated. You will receive a confirmation once the review is complete.
             </p>
             
-            <div className="w-full bg-gray-50 rounded-lg p-4 mb-6">
-              <p className="text-sm text-gray-500 mb-1">Session ID</p>
-              <p className="font-mono text-sm text-gray-900">{sessionId}</p>
+            <div className="w-full bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 mb-6 border border-green-200">
+              <p className="text-sm font-semibold text-gray-500 mb-2 uppercase tracking-wide">Session ID</p>
+              <p className="font-mono text-lg text-gray-900 font-bold">{sessionId}</p>
             </div>
 
             <button
               onClick={handleReturnHome}
-              className="w-full bg-green-600 text-white px-6 py-4 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center"
+              className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-4 rounded-xl font-bold hover:from-green-700 hover:to-emerald-700 transition-all flex items-center justify-center shadow-lg"
             >
               <Home className="w-5 h-5 mr-2" />
               Return to Home
@@ -60,58 +60,68 @@ export default function Summary() {
   return (
     <div className="min-h-screen bg-gray-50 pb-8">
       {/* Header */}
-      <div className="bg-white border-b px-4 py-4">
-        <h1 className="text-xl font-bold text-gray-900">Review & Submit</h1>
-        <p className="text-gray-600 text-sm">Review your evidence before submitting</p>
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-6 pb-16">
+        <h1 className="text-3xl font-bold mb-2">Review & Submit</h1>
+        <p className="text-blue-100 text-lg">Review your evidence before submitting</p>
       </div>
 
-      <div className="px-4 py-6 space-y-6">
+      <div className="px-4 -mt-10 py-6 space-y-6">
         {/* Summary Cards */}
-        <div className="bg-white rounded-xl shadow p-6">
-          <h2 className="font-semibold text-gray-900 mb-4">Evidence Summary</h2>
+        <div className="bg-white rounded-xl shadow-xl p-6">
+          <h2 className="font-bold text-gray-900 mb-6 text-xl">Evidence Summary</h2>
           
           <div className="space-y-4">
-            <div className="flex items-center justify-between py-3 border-b border-gray-100">
+            <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
               <div className="flex items-center">
-                <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                <span className="text-gray-700">Photos captured</span>
+                <div className="bg-blue-100 p-2 rounded-lg mr-3">
+                  <Camera className="w-5 h-5 text-blue-600" />
+                </div>
+                <span className="text-gray-700 font-semibold">Photos captured</span>
               </div>
-              <span className="font-medium text-gray-900">5/5</span>
+              <span className="font-bold text-gray-900 text-lg">5/5</span>
             </div>
             
-            <div className="flex items-center justify-between py-3 border-b border-gray-100">
+            <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
               <div className="flex items-center">
-                <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                <span className="text-gray-700">GPS location</span>
+                <div className="bg-green-100 p-2 rounded-lg mr-3">
+                  <MapPin className="w-5 h-5 text-green-600" />
+                </div>
+                <span className="text-gray-700 font-semibold">GPS location</span>
               </div>
-              <span className="font-medium text-gray-900">Captured</span>
+              <span className="font-bold text-green-600 text-lg">Captured</span>
             </div>
             
-            <div className="flex items-center justify-between py-3 border-b border-gray-100">
+            <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
               <div className="flex items-center">
-                <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                <span className="text-gray-700">Checklist items</span>
+                <div className="bg-purple-100 p-2 rounded-lg mr-3">
+                  <List className="w-5 h-5 text-purple-600" />
+                </div>
+                <span className="text-gray-700 font-semibold">Checklist items</span>
               </div>
-              <span className="font-medium text-gray-900">5/5 completed</span>
+              <span className="font-bold text-gray-900 text-lg">5/5 completed</span>
             </div>
             
-            <div className="flex items-center justify-between py-3">
+            <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
               <div className="flex items-center">
-                <AlertCircle className="w-5 h-5 text-orange-600 mr-3" />
-                <span className="text-gray-700">Estimated upload size</span>
+                <div className="bg-orange-100 p-2 rounded-lg mr-3">
+                  <AlertCircle className="w-5 h-5 text-orange-600" />
+                </div>
+                <span className="text-gray-700 font-semibold">Estimated upload size</span>
               </div>
-              <span className="font-medium text-gray-900">~15 MB</span>
+              <span className="font-bold text-gray-900 text-lg">~15 MB</span>
             </div>
           </div>
         </div>
 
         {/* Offline Notice */}
-        <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+        <div className="bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-5">
           <div className="flex items-start">
-            <AlertCircle className="w-5 h-5 text-orange-600 mr-2 mt-0.5" />
+            <div className="bg-orange-100 p-2 rounded-lg mr-3 mt-0.5">
+              <AlertCircle className="w-5 h-5 text-orange-600" />
+            </div>
             <div>
-              <p className="text-sm font-medium text-orange-900">Offline Mode</p>
-              <p className="text-sm text-orange-700 mt-1">
+              <p className="font-bold text-orange-900 mb-1">Offline Mode</p>
+              <p className="text-orange-700">
                 Your evidence will be cached locally and uploaded automatically when you're back online.
               </p>
             </div>
@@ -120,14 +130,14 @@ export default function Summary() {
 
         {/* Upload Progress */}
         {isUploading && (
-          <div className="bg-white rounded-xl shadow p-6">
+          <div className="bg-white rounded-xl shadow-xl p-6">
             <div className="flex items-center justify-between mb-4">
-              <span className="font-medium text-gray-900">Uploading evidence...</span>
-              <span className="text-sm text-gray-600">{uploadProgress}%</span>
+              <span className="font-bold text-gray-900 text-lg">Uploading evidence...</span>
+              <span className="text-sm font-bold text-blue-600">{uploadProgress}%</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
+            <div className="w-full bg-gray-200 rounded-full h-3">
               <div 
-                className="bg-blue-600 h-2 rounded-full transition-all"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 h-3 rounded-full transition-all"
                 style={{ width: `${uploadProgress}%` }}
               />
             </div>
@@ -138,7 +148,7 @@ export default function Summary() {
         {!isUploading && (
           <button
             onClick={handleSubmit}
-            className="w-full bg-blue-600 text-white px-6 py-4 rounded-xl font-medium hover:bg-blue-700 transition-colors flex items-center justify-center text-lg"
+            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-4 rounded-xl font-bold hover:from-blue-700 hover:to-purple-700 transition-all flex items-center justify-center text-lg shadow-lg"
           >
             <Upload className="w-5 h-5 mr-2" />
             Submit Evidence

@@ -9,6 +9,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1f2937;
 }
 
 .bg-gradient-to-br {
@@ -23,4 +26,19 @@ body {
 .to-blue-800 {
   --tw-gradient-to: #1e40af;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+/* Enhanced readability */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+button {
+  font-weight: 500;
+}
+
+input, select, textarea {
+  font-size: 16px;
+  line-height: 1.5;
 }
