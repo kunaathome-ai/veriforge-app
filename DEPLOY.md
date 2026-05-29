@@ -26,8 +26,8 @@
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/your-org/proof-of-work-anywhere.git
-cd proof-of-work-anywhere
+git clone https://github.com/kunaathome-ai/veriforge-app.git
+cd veriforge-app
 ```
 
 ### 2. Configure Environment Variables
@@ -76,8 +76,8 @@ cd backend/workers/ai-inspector && npm run dev
 cd backend/workers/validation-worker && npm run dev
 
 # Start frontend applications
-cd frontend/admin && npm run dev
-cd frontend/worker && npm run dev
+cd frontend/admin && npm run dev      # http://localhost:3000
+cd frontend/worker && npm run dev     # http://localhost:3001
 ```
 
 ## On-Premises Deployment
@@ -103,14 +103,14 @@ helm install minio minio/minio --set persistence.enabled=true
 ### 3. Deploy Application
 ```bash
 # Update Helm values
-cp infrastructure/helm/pow-anywhere/values.yaml infrastructure/helm/pow-anywhere/values-custom.yaml
+cp infrastructure/helm/veriforge/values.yaml infrastructure/helm/veriforge/values-custom.yaml
 # Edit values-custom.yaml with your configuration
 
 # Deploy
-helm install pow-anywhere infrastructure/helm/pow-anywhere \
+helm install veriforge infrastructure/helm/veriforge \
   --namespace production \
   --create-namespace \
-  --values infrastructure/helm/pow-anywhere/values-custom.yaml
+  --values infrastructure/helm/veriforge/values-custom.yaml
 ```
 
 ### 4. Verify Deployment
@@ -122,7 +122,7 @@ kubectl get pods -n production
 kubectl get svc -n production
 
 # View logs
-kubectl logs -f deployment/pow-anywhere-job-service -n production
+kubectl logs -f deployment/veriforge-job-service -n production
 ```
 
 ## Cloud Deployment
@@ -132,7 +132,7 @@ kubectl logs -f deployment/pow-anywhere-job-service -n production
 #### 1. Configure Azure CLI
 ```bash
 az login
-az account set --subscription <subscription-id>
+az account set --subscription 5fdb2872-f55e-4554-9476-9c58fd52c2b1
 ```
 
 #### 2. Deploy Infrastructure
@@ -145,18 +145,25 @@ terraform apply tfplan
 
 #### 3. Get AKS Credentials
 ```bash
-az aks get-credentials --resource-group pow-anywhere-rg --name pow-aks
+az aks get-credentials --resource-group veriforge-rg --name veriforge-aks
 ```
 
 #### 4. Deploy Application
 ```bash
-helm install pow-anywhere infrastructure/helm/pow-anywhere \
+helm install veriforge infrastructure/helm/veriforge \
   --namespace production \
   --create-namespace \
   --set runtimeMode=cloud \
   --set storage.type=azure_blob \
   --set storage.azure.connectionString=$AZURE_STORAGE_CONNECTION_STRING
 ```
+
+#### 5. Frontend Deployment (Azure Static Web Apps)
+The frontend applications are deployed via Azure Static Web Apps with GitHub CI/CD:
+- **Admin Console**: https://black-beach-0c0b94c0f.7.azurestaticapps.net
+- **Worker UI**: https://ashy-moss-071e3de0f.7.azurestaticapps.net
+
+Pushing to `main` branch triggers automatic build and deployment.
 
 ### AWS Deployment
 
@@ -175,12 +182,12 @@ terraform apply tfplan
 
 #### 3. Get EKS Credentials
 ```bash
-aws eks update-kubeconfig --name pow-eks --region us-east-1
+aws eks update-kubeconfig --name veriforge-eks --region us-east-1
 ```
 
 #### 4. Deploy Application
 ```bash
-helm install pow-anywhere infrastructure/helm/pow-anywhere \
+helm install veriforge infrastructure/helm/veriforge \
   --namespace production \
   --create-namespace \
   --set runtimeMode=cloud \
@@ -207,12 +214,12 @@ terraform apply tfplan
 
 #### 3. Get GKE Credentials
 ```bash
-gcloud container clusters get-credentials pow-gke --region us-central1
+gcloud container clusters get-credentials veriforge-gke --region us-central1
 ```
 
 #### 4. Deploy Application
 ```bash
-helm install pow-anywhere infrastructure/helm/pow-anywhere \
+helm install veriforge infrastructure/helm/veriforge \
   --namespace production \
   --create-namespace \
   --set runtimeMode=cloud \
@@ -290,10 +297,10 @@ k6 run tests/load/basic.js
 ### Rolling Updates
 ```bash
 # Build new images
-docker build -t pow-anywhere:latest .
+docker build -t veriforge:latest .
 
 # Update deployment
-helm upgrade pow-anywhere infrastructure/helm/pow-anywhere \
+helm upgrade veriforge infrastructure/helm/veriforge \
   --namespace production \
   --set image.tag=latest \
   --wait
@@ -312,7 +319,7 @@ npm run migrate:status
 
 ### Helm Rollback
 ```bash
-helm rollback pow-anywhere <revision> -n production
+helm rollback veriforge <revision> -n production
 ```
 
 ### Terraform Rollback
@@ -369,61 +376,45 @@ kubectl apply -f infrastructure/monitoring/servicemonitors.yaml
 helm install grafana bitnami/grafana
 
 # Import dashboards
-# Configure datasources
+kubectl create configmap grafana-dashboards \
+  --from-file=infrastructure/monitoring/dashboards/
 ```
 
-### Logging
+### Alerting
 ```bash
-# Install Loki
-helm install loki grafana/loki
+# Configure AlertManager
+kubectl apply -f infrastructure/monitoring/alertmanager.yaml
 
-# Install Promtail
-helm install promtail grafana/promtail
+# Configure Slack/email notifications
+kubectl create secret generic alertmanager-config \
+  --from-file=infrastructure/monitoring/alertmanager-config.yaml
 ```
 
-## Security Hardening
+## Resource URLs
 
-### Network Policies
-```bash
-# Apply network policies
-kubectl apply -f infrastructure/security/network-policies.yaml
-```
+### Production (Azure)
+- **Admin Console**: https://black-beach-0c0b94c0f.7.azurestaticapps.net
+- **Worker UI**: https://ashy-moss-071e3de0f.7.azurestaticapps.net
+- **ACR**: veriforgeacr.azurecr.io
+- **Resource Group**: veriforge-rg (East US 2)
+- **Subscription**: 5fdb2872-f55e-4554-9476-9c58fd52c2b1
+- **Tenant**: d51415e7-b981-40ac-8186-51f078dbbfd4
 
-### Pod Security
-```bash
-# Apply PodSecurityPolicies
-kubectl apply -f infrastructure/security/psp.yaml
-```
+### Local Development
+- **Admin Console**: http://localhost:3000
+- **Worker UI**: http://localhost:3001
+- **Job Service**: http://localhost:3001
+- **Session Service**: http://localhost:3002
+- **Evidence Service**: http://localhost:3003
+- **Config Service**: http://localhost:3004
+- **AI Inspector**: http://localhost:3005
+- **Validation Worker**: http://localhost:3006
+- **Report Service**: http://localhost:3007
+- **Delivery Service**: http://localhost:3008
+- **Billing Service**: http://localhost:3009
+- **Redis**: localhost:6379
+- **MinIO**: localhost:9000 (console: 9001)
 
-### Secrets Management
-```bash
-# Use Sealed Secrets
-kubectl apply -f infrastructure/security/sealed-secrets.yaml
-
-# Or use external secret manager
-# Configure Vault integration
-```
-
-## Backup Configuration
-
-### Automated Backups
-```bash
-# Configure Velero
-velero install --provider aws --bucket velero-backups --secret-file credentials-velero.yaml
-
-# Create schedule
-velero schedule create daily-backup --schedule "0 2 * * *"
-```
-
-### Disaster Recovery
-```bash
-# Restore from backup
-velero restore create --from-backup daily-backup-<timestamp>
-```
-
-## Support
-
-For deployment support:
-- Documentation: https://docs.proof-of-work-anywhere.com
-- Email: support@proof-of-work-anywhere.com
-- Slack: #deployment-help
+## Demo Credentials
+- **Email**: admin@veriforge.com
+- **Password**: admin123

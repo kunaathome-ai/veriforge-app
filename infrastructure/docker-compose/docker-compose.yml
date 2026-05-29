@@ -184,13 +184,13 @@ services:
       - billing-data:/data
       - ../../backend/services/billing-service/src:/app/src
 
-  # Admin Console
+  # Admin Console (nginx serves on port 80 in container)
   admin-console:
     build:
       context: ../../frontend/admin
       dockerfile: ../../Dockerfile.frontend
     ports:
-      - "3000:3000"
+      - "3000:80"
     environment:
       - VITE_API_URL=http://localhost:3001
     volumes:
@@ -200,13 +200,13 @@ services:
       - session-service
       - config-service
 
-  # Worker UI
+  # Worker UI (nginx serves on port 80 in container)
   worker-ui:
     build:
       context: ../../frontend/worker
       dockerfile: ../../Dockerfile.frontend
     ports:
-      - "3010:3010"
+      - "3010:80"
     environment:
       - VITE_API_URL=http://localhost:3002
     volumes:

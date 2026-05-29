@@ -40,7 +40,7 @@ jobs:
       
       - name: Get AKS Credentials
         run: |
-          az aks get-credentials --resource-group pow-anywhere-rg --name pow-aks
+          az aks get-credentials --resource-group veriforge-rg --name veriforge-aks
       
       - name: Set up kubectl
         uses: azure/setup-kubectl@v3
@@ -49,7 +49,7 @@ jobs:
       
       - name: Deploy to AKS
         run: |
-          helm upgrade --install pow-anywhere infrastructure/helm/pow-anywhere \
+          helm upgrade --install veriforge infrastructure/helm/veriforge \
             --namespace default \
             --create-namespace \
             --set image.tag=${{ github.sha }} \
@@ -85,7 +85,7 @@ jobs:
       
       - name: Update kubeconfig
         run: |
-          aws eks update-kubeconfig --name pow-eks --region us-east-1
+          aws eks update-kubeconfig --name veriforge-eks --region us-east-1
       
       - name: Set up kubectl
         uses: azure/setup-kubectl@v3
@@ -94,7 +94,7 @@ jobs:
       
       - name: Deploy to EKS
         run: |
-          helm upgrade --install pow-anywhere infrastructure/helm/pow-anywhere \
+          helm upgrade --install veriforge infrastructure/helm/veriforge \
             --namespace default \
             --create-namespace \
             --set image.tag=${{ github.sha }} \
@@ -130,7 +130,7 @@ jobs:
       
       - name: Get GKE credentials
         run: |
-          gcloud container clusters get-credentials pow-gke --region us-central1
+          gcloud container clusters get-credentials veriforge-gke --region us-central1
       
       - name: Set up kubectl
         uses: azure/setup-kubectl@v3
@@ -139,7 +139,7 @@ jobs:
       
       - name: Deploy to GKE
         run: |
-          helm upgrade --install pow-anywhere infrastructure/helm/pow-anywhere \
+          helm upgrade --install veriforge infrastructure/helm/veriforge \
             --namespace default \
             --create-namespace \
             --set image.tag=${{ github.sha }} \
@@ -171,7 +171,7 @@ jobs:
           WORKER_URL: ${{ secrets.WORKER_URL }}
       
       - name: Upload test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: e2e-test-results

@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # Local deployment script for Veriforge
+# Reflects the actual manual steps used during development
 set -e
 
-echo "🚀 Deploying Veriforge to Azure Static Web Apps"
+echo "🚀 Veriforge Local Build & Deploy Script"
+echo ""
 
 # Build Admin Console
 echo "📦 Building Admin Console..."
@@ -20,8 +22,13 @@ npm run build
 cd ../..
 
 echo "✅ Build complete!"
-echo "Admin Console: https://black-beach-0c0b94c0f.7.azurestaticapps.net"
-echo "Worker UI: https://ashy-moss-071e3de0f.7.azurestaticapps.net"
 echo ""
-echo "Note: Azure Static Web Apps are configured to build from GitHub repository."
-echo "The apps will automatically build and deploy when you push to main branch."
+echo "🖥️  To start local dev servers:"
+echo "    cd frontend/admin && npm run dev    # http://localhost:3000"
+echo "    cd frontend/worker && npm run dev  # http://localhost:3001"
+echo ""
+echo "🌐 Deployed Azure URLs (auto-deploy from GitHub):"
+echo "    Admin Console: https://black-beach-0c0b94c0f.7.azurestaticapps.net"
+echo "    Worker UI: https://ashy-moss-071e3de0f.7.azurestaticapps.net"
+echo ""
+echo "📋 To deploy: commit and push to main branch"
