@@ -215,17 +215,19 @@ Proof of Work Anywhere is a production-ready, cloud-agnostic micro-SaaS platform
 ## Deployment URLs
 
 ### Demo Environment
-**Status**: ✅ Deployed
-- Admin Console: https://black-beach-0c0b94c0f.7.azurestaticapps.net
-- Worker UI: https://ashy-moss-071e3de0f.7.azurestaticapps.net
+**Status**: ✅ Infrastructure Deployed, Local Builds Working
+- Admin Console: https://black-beach-0c0b94c0f.7.azurestaticapps.net (configured for GitHub auto-deploy)
+- Worker UI: https://ashy-moss-071e3de0f.7.azurestaticapps.net (configured for GitHub auto-deploy)
 - Azure Container Registry: veriforgeacr.azurecr.io
 - Resource Group: veriforge-rg (East US 2)
+- Local Builds: ✅ Both frontends build successfully
+- GitHub Repository: https://github.com/kunaathome-ai/veriforge-app
 
 ### Access Credentials
 **Status**: Public Access
 - Admin Console: Public access (authentication to be configured)
 - Worker Access: Public access (magic link system active)
-- GitHub Repository: https://github.com/kunaathome-ai/proof-of-work-anywhere
+- GitHub Repository: https://github.com/kunaathome-ai/veriforge-app
 
 ## Test Results
 
