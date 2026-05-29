@@ -215,7 +215,7 @@ Proof of Work Anywhere is a production-ready, cloud-agnostic micro-SaaS platform
 ## Deployment URLs
 
 ### Demo Environment
-**Status**: ✅ Infrastructure Deployed, Local Builds Working
+**Status**: ✅ Infrastructure Deployed, Authentication Added
 - Admin Console: https://black-beach-0c0b94c0f.7.azurestaticapps.net (configured for GitHub auto-deploy)
 - Worker UI: https://ashy-moss-071e3de0f.7.azurestaticapps.net (configured for GitHub auto-deploy)
 - Azure Container Registry: veriforgeacr.azurecr.io
@@ -224,8 +224,8 @@ Proof of Work Anywhere is a production-ready, cloud-agnostic micro-SaaS platform
 - GitHub Repository: https://github.com/kunaathome-ai/veriforge-app
 
 ### Access Credentials
-**Status**: Public Access
-- Admin Console: Public access (authentication to be configured)
+**Status**: ✅ Authentication Implemented
+- Admin Console: Login required (demo: admin@veriforge.com / admin123)
 - Worker Access: Public access (magic link system active)
 - GitHub Repository: https://github.com/kunaathome-ai/veriforge-app
 
