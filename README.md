@@ -39,7 +39,7 @@ A cloud-agnostic, enterprise-ready micro-SaaS for proof of work validation with 
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/your-org/proof-of-work-anywhere.git
+git clone https://github.com/kunaathome-ai/proof-of-work-anywhere.git
 cd proof-of-work-anywhere
 ```
 

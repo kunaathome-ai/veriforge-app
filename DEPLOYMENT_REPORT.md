@@ -1,6 +1,6 @@
 # Proof of Work Anywhere - Deployment Report
 
-**Date**: 2026-05-28
+**Date**: 2026-05-29
 **Version**: 1.0.0
 **Status**: Development Complete
 
@@ -216,10 +216,10 @@ Proof of Work Anywhere is a production-ready, cloud-agnostic micro-SaaS platform
 
 ### Demo Environment
 **Status**: ✅ Deployed
-- Admin Console: https://thankful-plant-0c221700f.7.azurestaticapps.net
-- Worker UI: https://ashy-tree-0fd658c0f.7.azurestaticapps.net
-- Azure Container Registry: powanywhereacr.azurecr.io
-- Resource Group: pow-anywhere-rg (East US 2)
+- Admin Console: https://black-beach-0c0b94c0f.7.azurestaticapps.net
+- Worker UI: https://ashy-moss-071e3de0f.7.azurestaticapps.net
+- Azure Container Registry: veriforgeacr.azurecr.io
+- Resource Group: veriforge-rg (East US 2)
 
 ### Access Credentials
 **Status**: Public Access
