@@ -215,15 +215,17 @@ Proof of Work Anywhere is a production-ready, cloud-agnostic micro-SaaS platform
 ## Deployment URLs
 
 ### Demo Environment
-**Status**: Pending deployment
-- Admin Console: TBD
-- Worker UI: TBD
-- API Gateway: TBD
+**Status**: ✅ Deployed
+- Admin Console: https://thankful-plant-0c221700f.7.azurestaticapps.net
+- Worker UI: https://ashy-tree-0fd658c0f.7.azurestaticapps.net
+- Azure Container Registry: powanywhereacr.azurecr.io
+- Resource Group: pow-anywhere-rg (East US 2)
 
 ### Access Credentials
-**Status**: Pending deployment
-- Admin User: TBD
-- Worker Access: TBD (via magic links)
+**Status**: Public Access
+- Admin Console: Public access (authentication to be configured)
+- Worker Access: Public access (magic link system active)
+- GitHub Repository: https://github.com/kunaathome-ai/proof-of-work-anywhere
 
 ## Test Results
 
